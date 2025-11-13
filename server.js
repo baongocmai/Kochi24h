@@ -4,7 +4,7 @@ const path = require('path');
 const XLSX = require('xlsx');
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 // Folder chứa file Excel
 const dataDir = path.join(__dirname, 'Transaction Sales Data');
@@ -37,5 +37,6 @@ app.get('/api/excel', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server chạy tại http://localhost:${port}`);
+  console.log(`Server is running on port ${port}`);
 });
+
