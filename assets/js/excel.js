@@ -28,7 +28,8 @@ function initExcelViewer() {
   attachControlEvents();
   showLoadingState('Đang tải dữ liệu từ Transaction Sales Data...');
 
-  fetch('/api/excel')
+  // fetch('/api/excel')
+  fetch('./excel.js')
     .then(res => {
       if (!res.ok) {
         throw new Error(`HTTP ${res.status}`);
