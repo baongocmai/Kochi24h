@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hệ thống Dashboard Power BI</title>
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/img/snapedit_1761268717378.jpg">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <header>
+    <img src="assets/img/logoKochi.png" alt="Logo Kochi 24h" class="header-logo">
+    <h1>HỆ THỐNG PHÂN TÍCH KINH DOANH KOCHI24H</h1>
+  </header>
+
+  <!-- Thanh menu chính -->
+  <nav class="main-nav">
+    <button class="nav-toggle" aria-label="Mở menu tab" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="tabs">
+      <a onclick="showTab('data')" data-tab="data">
+        <span class="tab-icon" aria-hidden="true"></span>
+        <span class="tab-label">Dữ liệu</span>
+      </a>
+      <a onclick="showTab('dashboard')" data-tab="dashboard">
+        <span class="tab-icon" aria-hidden="true"></span>
+        <span class="tab-label">Dashboard</span>
+      </a>
+      <a onclick="showTab('insight')" data-tab="insight">
+        <span class="tab-icon" aria-hidden="true"></span>
+        <span class="tab-label">Insight</span>
+      </a>
+    </div>
+    <div class="nav-tools">
+      <input type="text" id="searchBox" placeholder="🔍 Tìm kiếm tab..." oninput="searchTabs()">
+      <button class="toggle-theme" onclick="toggleTheme()">🌙 Thay đổi chế độ</button>
+    </div>
+  </nav>
+
+  <!-- TAB DATA -->
+  <!-- <div id="dataTab" class="tab">
+    <h2>Các bảng dữ liệu</h2>
+
+    <div id="fileNav"></div>
+    <div id="dataTable"></div>
+  </div>
+  
+ -->
+  <div id="dataTab" class="tab">
+    <h2>Các bảng dữ liệu</h2>
+    <div id="fileNav"></div>
+    <div id="dataControls" class="data-controls">
+      <div class="filter-section">
+        <h3>Bộ lọc</h3>
+        <div class="filter-row">
+          <label for="columnFilter">Cột</label>
+          <select id="columnFilter">
+            <option value="__all">Tất cả</option>
+          </select>
+          <label for="keywordFilter">Từ khóa</label>
+          <input type="text" id="keywordFilter" placeholder="Nhập từ khóa...">
+          <button type="button" id="applyFilterBtn">Áp dụng</button>
+          <button type="button" id="resetFilterBtn" class="ghost">Xóa</button>
+        </div>
+      </div>
+    </div>
+    <div id="dataSummary" class="summary"></div>
+  </div>
+
+  <!-- TAB DASHBOARD -->
+  <div id="dashboardTab" class="tab" style="display:none">
+    <h2>Dashboard</h2>
+    <div class="container" id="dashboardList">
+      <iframe title="TQH_Kochi24h" width="1140" height="541.25" src="https://app.powerbi.com/reportEmbed?reportId=169abf34-0c15-441b-b9a2-58136b8a6b58&autoAuth=true&ctid=73483b9a-f860-4825-84a6-76e0a8fba516" frameborder="0" allowFullScreen="true"></iframe>
+    </div>
+  </div>
+
+  <!-- TAB INSIGHT -->
+  <div id="insightTab" class="tab" style="display:none">
+    <h2>Trung tâm Insight</h2>
+    <p class="insight-description">
+      Khai thác nhanh các insight nổi bật từ dữ liệu kinh doanh và nhờ AI hỗ trợ giải đáp câu hỏi chuyên sâu.
+    </p>
+
+    <div class="insight-subnav">
+      <button class="insight-subtab active" data-subtab="overview" onclick="switchInsightSubtab('overview')">
+        Insight
+      </button>
+      <button class="insight-subtab" data-subtab="ai" onclick="switchInsightSubtab('ai')">
+        AI Support
+      </button>
+    </div>
+
+    <div id="insightOverviewPanel" class="insight-panel">
+      <div class="insight-summary-row">
+        <div class="summary-card">
+          <span class="summary-label">Tăng trưởng tháng</span>
+          <span class="summary-value">+12%</span>
+          <span class="summary-note">Doanh thu so với cùng kỳ</span>
+        </div>
+        <div class="summary-card orange">
+          <span class="summary-label">Tỷ lệ giữ chân</span>
+          <span class="summary-value">87%</span>
+          <span class="summary-note">Khách hàng quay lại 3 tháng</span>
+        </div>
+        <div class="summary-card teal">
+          <span class="summary-label">Chi phí bình quân</span>
+          <span class="summary-value">-8%</span>
+          <span class="summary-note">So với kế hoạch ngân sách</span>
+        </div>
+      </div>
+
+      <div class="insight-grid">
+        <div class="insight-card" onclick="showInsightDetail('insight1')">
+          <span class="insight-card-icon" aria-hidden="true">🚀</span>
+          <h3>Hiệu suất bán hàng</h3>
+          <p>Top 3 sản phẩm mang về 65% doanh thu toàn hệ thống.</p>
+          <span class="card-link">Xem chi tiết →</span>
+        </div>
+        <div class="insight-card" onclick="showInsightDetail('insight2')">
+          <span class="insight-card-icon" aria-hidden="true">🧑‍🤝‍🧑</span>
+          <h3>Hành vi khách hàng</h3>
+          <p>Nhóm khách thân thiết chi tiêu cao gấp 2.1 lần khách mới.</p>
+          <span class="card-link">Xem chi tiết →</span>
+        </div>
+        <div class="insight-card" onclick="showInsightDetail('insight3')">
+          <span class="insight-card-icon" aria-hidden="true">📦</span>
+          <h3>Tồn kho & cung ứng</h3>
+          <p>12 SKU có tồn kho &gt; 45 ngày, cần tối ưu luân chuyển.</p>
+          <span class="card-link">Xem chi tiết →</span>
+        </div>
+        <div class="insight-card" onclick="showInsightDetail('insight4')">
+          <span class="insight-card-icon" aria-hidden="true">📣</span>
+          <h3>Chiến dịch marketing</h3>
+          <p>ROI trung bình đạt 4.3; kênh social mang 58% chuyển đổi.</p>
+          <span class="card-link">Xem chi tiết →</span>
+        </div>
+      </div>
+
+      <div id="insightDetailWrapper" class="insight-detail-wrapper">
+        <div class="insight-detail" id="insight1">
+          <div class="metric-pills">
+            <span class="metric-chip">65% doanh thu từ top 3 sản phẩm</span>
+            <span class="metric-chip">Biên lợi nhuận +9% YoY</span>
+          </div>
+          <h3>Hiệu suất bán hàng</h3>
+          <p>Doanh thu tập trung vào nhóm sản phẩm chủ lực, trong khi 20% danh mục chỉ đóng góp 5% doanh thu.</p>
+          <ul class="detail-list">
+            <li><strong>Đề xuất:</strong> Duy trì ưu đãi chéo cho top sản phẩm và xây dựng combo với nhóm bán chậm.</li>
+            <li><strong>Cảnh báo:</strong> Hai chi nhánh miền Trung có xu hướng giảm trưởng -3% trong 2 tuần.</li>
+          </ul>
+          <button class="back-btn" onclick="backToOverview()">⬅ Quay lại tổng quan</button>
+        </div>
+
+        <div class="insight-detail" id="insight2">
+          <div class="metric-pills">
+            <span class="metric-chip">CLV khách thân thiết +35%</span>
+            <span class="metric-chip">Tỷ lệ hủy đơn chỉ 1.4%</span>
+          </div>
+          <h3>Hành vi khách hàng</h3>
+          <p>Khách hàng thân thiết chiếm 28% lượng khách nhưng tạo ra 61% doanh thu và tỷ lệ giới thiệu cao nhất.</p>
+          <ul class="detail-list">
+            <li><strong>Đề xuất:</strong> Triển khai chương trình referral kép, thưởng thêm cho khách giới thiệu thành công.</li>
+            <li><strong>Hành động:</strong> Cá nhân hóa email/CRM dựa trên lịch sử mua để tăng lượt mua lại.</li>
+          </ul>
+          <button class="back-btn" onclick="backToOverview()">⬅ Quay lại tổng quan</button>
+        </div>
+
+        <div class="insight-detail" id="insight3">
+          <div class="metric-pills">
+            <span class="metric-chip">12 SKU tồn &gt; 45 ngày</span>
+            <span class="metric-chip">Chi phí lưu kho tăng 6%</span>
+          </div>
+          <h3>Tồn kho & cung ứng</h3>
+          <p>Một số SKU luân chuyển chậm gây áp lực ngân sách và chiếm diện tích kho đáng kể.</p>
+          <ul class="detail-list">
+            <li><strong>Đề xuất:</strong> Xây dựng chiến dịch flash-sale để giải phóng hàng tồn lâu.</li>
+            <li><strong>Hành động:</strong> Đồng bộ kế hoạch nhập hàng với dữ liệu bán chạy để tối ưu tồn kho.</li>
+          </ul>
+          <button class="back-btn" onclick="backToOverview()">⬅ Quay lại tổng quan</button>
+        </div>
+
+        <div class="insight-detail" id="insight4">
+          <div class="metric-pills">
+            <span class="metric-chip">ROI trung bình 4.3x</span>
+            <span class="metric-chip">Social đóng góp 58% chuyển đổi</span>
+          </div>
+          <h3>Chiến dịch marketing</h3>
+          <p>Kênh digital mang lại hiệu quả vượt trội nhưng ngân sách vẫn phân bổ đồng đều cho tất cả kênh.</p>
+          <ul class="detail-list">
+            <li><strong>Đề xuất:</strong> Tăng ngân sách cho social +10% và thử nghiệm KOL/Influencer vừa tầm.</li>
+            <li><strong>Hành động:</strong> Dùng UTM tracking rõ ràng cho từng chiến dịch để đo lường chuẩn xác.</li>
+          </ul>
+          <button class="back-btn" onclick="backToOverview()">⬅ Quay lại tổng quan</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="insightAiPanel" class="insight-panel hidden">
+      <div class="ai-panel">
+        <div class="ai-instructions">
+          <h3>AI Support</h3>
+          <p>Nhập dữ liệu, bảng thống kê hoặc câu hỏi kinh doanh. AI sẽ phân tích và gợi ý hành động cụ thể.</p>
+          <ul>
+            <li>⭐ Gợi ý insight, xu hướng, phân khúc khách hàng.</li>
+            <li>📌 Kiểm tra giả thuyết, đề xuất chiến dịch, tối ưu vận hành.</li>
+            <li>🛠️ Kết hợp với số liệu thực tế để có kế hoạch hành động.</li>
+          </ul>
+        </div>
+
+        <div class="ai-form">
+          <label for="dataText">Nhập dữ liệu hoặc câu hỏi</label>
+          <textarea id="dataText" placeholder="Ví dụ: Doanh thu từng chi nhánh, KPI marketing, tồn kho…"></textarea>
+          <div class="ai-actions">
+            <button class="primary-btn" type="button" onclick="generateInsight()">Phân tích bằng AI 🤖</button>
+            <button class="ghost-btn" type="button" onclick="clearAiInput()">Xóa nội dung</button>
+          </div>
+          <div id="insightResult" class="ai-result"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    © 2025 Nhóm Kochi24h
+  </footer>
+
+  <script src="https://cdn.sheetjs.com/xlsx-0.19.1/package/dist/xlsx.full.min.js"></script>
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/excel.js"></script>
+  
+  <!-- <script src="js/insight.js"></script> -->
+
+
+</body>
+</html>
