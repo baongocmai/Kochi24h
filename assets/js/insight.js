@@ -1,11 +1,9 @@
-
 async function generateInsight() {
   const inputData = document.getElementById("dataText").value.trim();
   if (!inputData) return alert("Hãy nhập dữ liệu hoặc tóm tắt!");
 
   document.getElementById("insightResult").innerHTML = "⏳ Đang phân tích...";
 
-  // 🔑 Chèn API key vào đây hoặc lấy từ prompt (demo)
   const apiKey = "AIzaSyCZDsHthnmh32b9xVN7pjKLG1ACwitRNPA"; 
   const response = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
@@ -21,7 +19,11 @@ async function generateInsight() {
       ]
     })
   });
+
   const result = await response.json();
+  let markdownContent = result.choices[0].message.content;
+
+  // 🔹 Chuyển markdown thành HTML
   document.getElementById("insightResult").innerHTML =
-    `<h3>🧠 Insight:</h3><p>${result.choices[0].message.content}</p>`;
+    marked.parse(markdownContent);
 }

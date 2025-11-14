@@ -8,6 +8,7 @@
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" href="/assets/css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
   <header>
@@ -109,7 +110,7 @@
           <span class="summary-note">So với doanh thu</span>
         </div>
         <div class="summary-card teal">
-          <span class="summary-label">Tỷ lệ tồn kho sản phẩm cao</span>
+          <span class="summary-label">Tỷ lệ tồn kho sản phẩm</span>
           <span class="summary-value">25,71%</span>
           <span class="summary-note">Tỷ lệ trung bình tương đối cao</span>
         </div>
@@ -119,13 +120,13 @@
         <div class="insight-card" onclick="showInsightDetail('insight1')">
           <span class="insight-card-icon" aria-hidden="true">🚀</span>
           <h3>Tổng quan kinh doanh</h3>
-          <p>Top 3 sản phẩm mang về 65% doanh thu toàn hệ thống.</p>
+          <p>Miền Bắc mang về gần 50% doanh thu toàn hệ thống.</p>
           <span class="card-link">Xem chi tiết →</span>
         </div>
         <div class="insight-card" onclick="showInsightDetail('insight2')">
           <span class="insight-card-icon" aria-hidden="true">🧑‍🤝‍🧑</span>
           <h3>Hiệu suất bán hàng</h3>
-          <p>Nhóm khách thân thiết chi tiêu cao gấp 2.1 lần khách mới.</p>
+          <p>Lợi nhuận thực so với kỳ vọng +72%</p>
           <span class="card-link">Xem chi tiết →</span>
         </div>
         <div class="insight-card" onclick="showInsightDetail('insight3')">
@@ -145,29 +146,44 @@
       <div id="insightDetailWrapper" class="insight-detail-wrapper">
         <div class="insight-detail" id="insight1">
           <div class="metric-pills">
-            <span class="metric-chip">65% doanh thu từ top 3 sản phẩm</span>
-            <span class="metric-chip">Biên lợi nhuận +9% YoY</span>
+            <span class="metric-chip">Miền Bắc mang về gần 50% doanh thu toàn hệ thống</span>
+            <span class="metric-chip">Biên lợi nhuận +45% YoY</span>
           </div>
           <h3>Tổng quan kinh doanh</h3>
-          <p>Doanh thu tập trung vào nhóm sản phẩm chủ lực, trong khi 20% danh mục chỉ đóng góp 5% doanh thu.</p>
+          <p>Top các tỉnh có doanh thu cao nhất: TP.HCM, Thái Bình, Tuyên Quang, Nghệ An, Lạng Sơn, Thanh Hóa. Trong đó doanh thu tập trung vào nhóm sản phẩm chủ lực. </p>
           <ul class="detail-list">
             <li><strong>Đề xuất:</strong> Duy trì ưu đãi chéo cho top sản phẩm và xây dựng combo với nhóm bán chậm.</li>
-            <li><strong>Cảnh báo:</strong> Hai chi nhánh miền Trung có xu hướng giảm trưởng -3% trong 2 tuần.</li>
+            <li><strong>Cảnh báo:</strong> Cần đa dạng hóa khách hàng, mở rộng thị trường</li>
           </ul>
           <button class="back-btn" onclick="backToOverview()">⬅ Quay lại tổng quan</button>
         </div>
 
         <div class="insight-detail" id="insight2">
           <div class="metric-pills">
-            <span class="metric-chip">CLV khách thân thiết +35%</span>
-            <span class="metric-chip">Tỷ lệ hủy đơn chỉ 1.4%</span>
+            <span class="metric-chip">Lợi nhuận thực so với kỳ vọng +72%</span>
+            <span class="metric-chip">Nhóm các sản phẩm về thực phẩm chiếm 20% lợi nhuận</span>
           </div>
           <h3>Hiệu suất bán hàng</h3>
-          <p>Khách hàng thân thiết chiếm 28% lượng khách nhưng tạo ra 61% doanh thu và tỷ lệ giới thiệu cao nhất.</p>
+          <p>Nhóm khách hàng Wholesale chiếm tỷ trọng lớn, nhưng Distributor và Export có tiềm năng tăng trưởng.</p>
+          <p>Hiệu suất bán hàng hiện tập trung vào một số sản phẩm và nhóm khách hàng chính; cần đa dạng hóa danh mục sản phẩm và cân đối tập khách hàng để giảm rủi ro. </p>
+          <p>Xu hướng doanh thu theo tháng mang tính mùa vụ, do đó các chương trình khuyến mãi và marketing nên linh hoạt theo mùa.</p>          
+          <p> Miền Bắc và TP.HCM là thị trường chiến lược; các vùng miền khác vẫn còn dư địa phát triển.
+          </p>
           <ul class="detail-list">
-            <li><strong>Đề xuất:</strong> Triển khai chương trình referral kép, thưởng thêm cho khách giới thiệu thành công.</li>
-            <li><strong>Hành động:</strong> Cá nhân hóa email/CRM dựa trên lịch sử mua để tăng lượt mua lại.</li>
-          </ul>
+    <li>
+        <strong>Đề xuất:
+        </strong> 
+        <p>Đa dạng hóa sản phẩm và khách hàng.</p>
+        <p>Tối ưu hóa chiến lược khuyến mãi theo mùa.</p>
+        
+    </li>
+    <li>
+        <strong>Hành động:</strong> 
+        <p>Xây dựng lịch khuyến mãi chi tiết cho từng tháng, tập trung vào các sản phẩm phù hợp với nhu cầu theo mùa.</p>
+        <p>Sử dụng các kênh truyền thông phù hợp để quảng bá các chương trình khuyến mãi (ví dụ: mạng xã hội, email marketing).</p>    
+      </li>
+</ul>
+
           <button class="back-btn" onclick="backToOverview()">⬅ Quay lại tổng quan</button>
         </div>
 

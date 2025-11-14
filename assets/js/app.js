@@ -209,9 +209,10 @@ async function generateInsight() {
       }
       return;
     }
-
     const output = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'Không có phản hồi từ AI.';
-    resultBox.innerHTML = `<pre>${output}</pre>`;
+
+    resultBox.innerHTML = marked.parse(output);
+
   } catch (err) {
     console.error(err);
     resultBox.innerHTML = '❌ Không thể kết nối tới Gemini. Kiểm tra lại API key, kết nối mạng hoặc cài đặt CORS.';
