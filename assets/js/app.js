@@ -3,7 +3,7 @@ let currentInsightSubtab = 'overview';
 let navToggleButton = null;
 let navTabsContainer = null;
 const GEMINI_MODEL_ID = 'gemini-2.0-flash';
-const DEFAULT_GEMINI_API_KEY = 'AIzaSyCZDsHthnmh32b9xVN7pjKLG1ACwitRNPA';
+const DEFAULT_GEMINI_API_KEY = 'AIzaSyAw2cqlcA1hC7_wN6l3Rfyg7l7o9kYp0q8';
 
 function showTab(tab) {
   currentTab = tab;
